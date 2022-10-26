@@ -1,0 +1,762 @@
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz_التسويق</title>
+<!-- <link rel="stylesheet" href="style1.css"> -->
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> -->
+<link rel="stylesheet" href="font-awesome.css">
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="bootstrap.min.css">
+<style>
+
+
+body{
+    direction: rtl;
+}
+    .content {
+margin-top: 54px;
+}
+.header {
+padding: 15px;
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 9999;
+}
+.left-title {
+width: 80px;
+color: #fff;
+font-size: 18px;
+float: left;
+}
+.right-title {
+width: 150px;
+text-align: right;
+float: right;
+color: #fff;
+}
+.quiz-body {
+margin-top: 15px;
+padding-bottom: 50px;
+}
+.option-block-container {
+margin-top: 20px;
+max-width: 420px;
+}
+.option-block {
+padding: 10px;
+background: aliceblue;
+border: 1px solid #84c5fe;
+margin-bottom: 10px;
+cursor: pointer;
+}
+.result-question {
+font-weight: bold;
+}
+.c-wrong {
+margin-left: 20px;
+color: #ff0000;
+}
+.c-correct {
+margin-left: 20px;
+color: green;
+}
+.last-row {
+border-bottom: 1px solid #ccc;
+padding-bottom: 25px;
+margin-bottom: 25px;
+}
+.res-header {
+border-bottom: 1px solid #ccc;
+margin-bottom: 15px;
+padding-bottom: 15px;
+}
+
+
+
+</style>
+</head>
+<body>
+<header class="header bg-primary">
+<div class="left-title">JS Quiz</div>
+<div class="right-title">Total Questions: <span id="tque"></span></div>
+<div class="clearfix"></div>
+</header>
+<div class="content">
+    <div>
+    </div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-12">
+<div id="result" class="quiz-body">
+<form name="quizForm" onSubmit="">
+<fieldset class="form-group">
+<h4><span id="qid">1.</span> <span id="question"></span></h4>
+<div class="option-block-container" id="question-options">
+</div> <!-- End of option block -->
+</fieldset>
+<button name="previous" id="previous" class="btn btn-success">Previous</button>
+&nbsp;
+<button name="next" id="next" class="btn btn-success">Next</button>
+</form>
+</div>
+</div> <!-- End of col-sm-12 -->
+</div> <!-- End of row -->
+</div> <!-- ENd of container fluid -->
+</div> <!-- End of content -->
+<script src="jquery-3.6.0.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<script src="bootstrap.min.js"></script>
+
+<script>
+/* Created and coded by Abhilash Narayan */
+/* Quiz source: w3schools.com */
+input=document.querySelector("input")
+
+
+var quiz = {
+"JS": [
+{"id": 1,
+"question": "التسويق هو نشاط أنساني موجه لأشباع حاجات ورغبات الأنسان",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+
+}
+],
+"answer": "صح",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 2,
+"question": "التسويق هو عمليه ادارية وأجتماعية يستطيع من خلاله اشباع حاجات ورغبات الافراد وتبادل السلع بينهم وتبادل المنتجات مع الاخرين",
+"options": [
+{
+    "a": "صح",
+"b": "خطأ",
+
+}
+],
+"answer": "صح",
+"score": 0,
+"status": ""
+},
+{
+"id": 3,
+"question": "لا يمكن توسيع مفهوم التسويق ليشمل تسويق الافكار والمنطمات والخدمات",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+
+}
+],
+"answer": "خطأ",
+"score": 0,
+"status": ""
+},
+{
+"id": 4,
+"question": "مشكلة البيع هي مشكلة خارجية و مهمته اكتشاف حاجات ورغبات الفرد وحاجات  العملاة وتقديم المنتج الذي يشمل تلك الرغبة",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+
+}
+],
+"answer": "خطأ",
+"score": 0,
+"status": ""
+
+},
+{
+"id": 5,
+"question": "التسويق بتم التركيز فيه علي حجم المبيعات",
+"options": [
+{
+"a": "نعم",
+"b": "لا"
+}
+],
+"answer": "لا",
+"score": 0,
+"status": ""
+},
+{
+"id": 6,
+"question": "مهمة التسويق تبدء قبل ألانتاج بينما مهمة البيع تبدء بعد ألانتاج",
+"options": [
+{
+"a": "نعم",
+"b": "لا"
+}
+],
+"answer": "نعم",
+"score": 0,
+"status": ""
+},
+{
+"id": 7,
+"question": "يركز البيع علي تخطيط قصير ألامل وحاجة البائعين بينما التسويق يركز علي حاجة العملاء وتخطيط طويل ألاجل",
+"options": [
+{
+"a": "نعم",
+"b": "لا"
+}
+],
+"answer": "نعم",
+"score": 0,
+"status": ""
+},
+{
+"id": 8,
+"question": "يتكون سوق الصناعي من المنظمات التي تتولي شراء السلع والخدمات التي  تكمن في انتاج سلعة او خدمة اخري",
+"options": [
+{
+"a": "نعم",
+"b": "لا"
+}
+],
+"answer": "نعم",
+"score": 0,
+"status": ""
+},
+{
+"id": 9,
+"question": "هم الذين يقع عليهم عائق االمبادرة بغرض أو محاولة أثارة أعداد الخطط والبرامج التسويقية",
+"options": [
+{
+"a": "البائعين",
+"b": "المشترين",
+"c": "المسوقين"
+}
+],
+"answer": "المسوقين",
+"score": 0,
+"status": ""
+},
+{
+"id":10,
+"question": "يعبر عن مجموعة من الافراد او المنظمات الذين يوجهم اليهم البرامج التسويقية كما أنهم يمثلون دورا رئيسيا لقبول أو رفض العرض التسويقي",
+"options": [
+{
+"a": "البائع",
+"b": "السوق",
+"c": "المشتري"
+}
+],
+"answer": "السوق",
+"score": 0,
+"status": ""
+},
+{
+"id": 11,
+"question": "ماهي المنافع التي يساهم التسوبق في خلقها",
+"options": [
+{
+"a": "مكانية",
+"b": "الزمانية",
+"c": "حيازية",
+"d": "كل ماسبق",
+
+}
+],
+"answer": "كل ماسبق",
+"score": 0,
+"status": ""
+},
+{
+"id": 12,
+"question": "ما هي وظائف التسويق",
+"options": [
+{
+"a": "وظائف تحقق المنفعة الحيازية",
+"b": "وظائف تحقق المنفعة المكانية",
+"c": "وظائف تحقق المنفعة الادارة والتسويق",
+"d": "كل ماسبق",
+
+
+}
+],
+"answer": "كل ماسبق",
+"score": 0,
+"status": ""
+},
+{
+"id": 13,
+"question": "ماهي ألامكانيات التي يجب ان تتوافر ألي الافراد لأجراء عملية التبادل",
+"options": [
+{
+"a": "الحاجة الي سلع والخدمة",
+"b": "القدرة الشرائية",
+"c": "كل ماسبق"
+
+}
+],
+"answer": "كل ماسبق",
+"score": 0,
+"status": ""
+},
+{
+"id": 14,
+"question": "تتمثل .... من االجهزه والوحدات الحكوميه التي تتولي شراء السلع واالجهزه من أجل أداء خدماتها ووظائفها األساسيه.",
+"options": [
+{
+"a": "سوق المستهلك األخير",
+"b": "سوق الوسطاء",
+"c":"سوق الصناعه",
+"d":"سوق الحكومه",
+}
+],
+"answer": "سوق الحكومه",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 15,
+"question": "تتمثل .... من االجهزه والوحدات الحكوميه التي تتولي شراء السلع واالجهزه من أجل أداء خدماتها ووظائفها األساسيه.",
+"options": [
+{
+"a": "سوق المستهلك األخير",
+"b": "سوق الوسطاء",
+"c":"سوق الصناعه",
+"d":"سوق الحكومه",
+}
+],
+"answer": "سوق الحكومه",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 16,
+"question": "ادارة التسويق هي ممارسة العملية ألادارية بكافة مراحلها ووظائفها علي النشاط التسويقي بداء من التخطيط حتي الرقابة والمتابعة",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "صح",
+"score": 0,
+"status": ""
+},
+{
+"id": 17,
+"question": " داره التسويق هي العمليه الخاصه بتخطيط وتنفيذ ورقابه تسعير وترويج وتوزيع السلع والخدمات واألفكار لخلق التبادلات مع الاسواق المستهدفة التي يتحقق من خلالها أرضاء العملاء ",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "صح",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 18,
+"question": "تركز فلسلفه التوجيه بالمنتج علي تحسين اإلنتاج والتوزيع بدرجه عالية من الكفاءة.",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "خطأ",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 19,
+"question": "تركز فلسفه التوجيه باإلنتاج علي أن المستهلكين يفضلون المنتجات األكثر جودة وأداء وذات مواصفات جيدة.",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "خطأ",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 20,
+"question": "يركز المفهوم البيعي علي أن المستهلكين ال يقومون بشراء منتجات المنظمه بشكل كاف اال اتبعت أو قامت المنظمه بجهود بيع وترويج بصورة كبيرة",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "خطأ",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 21,
+"question": "يعد أساس نجاح المنظمات بعد قدرتها علي اشباع حاجات ورغبات العمالء وليس انتاج حجم كثير من المنتجات أو بذل مجهودات ترويجية ضخمة",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "صح",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 22,
+"question": "طبقا للمفهوم الموسع للتسويق يمكن تعريف المنتجات علي أنها األشياء الماديه والخدمات أو األفكار أو االفراد.",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "صح",
+"score": 0,
+"status": ""
+},
+{
+"id": 23,
+"question": "يعد الترويج أحد أهم العوامل المحددة أو المؤثرة في قبول العميل للمنتج أو السلعه التي يشتريها",
+"options": [
+{
+ "a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "خطأ",
+"score": 0,
+"status": ""
+},
+{
+"id": 24,
+"question": "يمثل السعر العنصر الوحيد في عناصر المزيج التسويقي المعبر عن االيراد في حين تمثل العناصر األخرى الثالث التكاليف",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "صح",
+"score": 0,
+"status": ""
+},
+{
+"id": 25,
+"question": "تعد عمليه توزيع المنتجات والقرارات المرتبطة بها من اسهل القرارات التي تواجه المنظمه",
+"options": [
+{
+"a": "صح",
+"b": "خطأ",
+}
+],
+"answer": "خطأ",
+"score": 0,
+"status": ""
+},
+{
+"id": 26,
+"question": "1.......-هي االطار الذي يحكم أو يوجه االعمال الضرورية الالزمة لتحقيق األهداف التسويقيه.",
+"options": [
+{
+"a": "أ-فلسفه اداره التسويق",
+"b": " ب-اداره التسويق",
+"c":"ج- المفهوم االجتماعي للتسويق",
+"d":"د-المزيج التسوييقي",
+}
+],
+"answer": "أ-فلسفه اداره التسويق",
+"score": 0,
+"status": ""
+},
+
+{
+"id": 26,
+"question": "1.......-هي االطار الذي يحكم أو يوجه االعمال الضرورية الالزمة لتحقيق األهداف التسويقيه.",
+"options": [
+{
+"a": "أ-فلسفه اداره التسويق",
+"b": " ب-اداره التسويق",
+"c":"ج- المفهوم االجتماعي للتسويق",
+"d":"د-المزيج التسوييقي",
+}
+],
+"answer": "أ-فلسفه اداره التسويق",
+"score": 0,
+"status": ""
+},
+{
+"id": 27,
+"question": "2-ماهي األركان الرئيسيه التي تستند اليها فلسفه التوجيه باإلنتاج",
+"options": [
+{
+"a": "أ-معرفه العمالء بأسعار السلعه",
+"b": "ب-عدم اهتمام العمالء باالختالفات بين أسعار الماركات المختلفه",
+"c":"ج-مهمه اداره المنظمه هي زياده كفاءه اإلنتاج والتوزيع لتخفيض التكلفه والعمل علي جذب العمالء.",
+"d":"د-جميع اإلجابات صحيحه",
+}
+],
+"answer": "د-جميع اإلجابات صحيحه",
+"score": 0,
+"status": ""
+}
+,{
+"id": 28,
+"question": "3-ماهي األركان الرئيسيه التي تستند اليها فلسفه التوجيه بالمنتج",
+"options": [
+{
+"a": "أ-ينظر العمالء الي السلع علي انها مجرد مواصفات وليس وسيله الشباع الحاجات",
+"b": "ب-توافر معلومات لدي العمالء عن جودة ومواصفات السلع والماركات البديله",
+"c":"ج-مهمه المنظمه تحسين مستوي جوده السلع بشكل مستمر",
+"d":"د-جميع اإلجابات صحيحه",
+}
+],
+"answer": "د-جميع اإلجابات صحيحه",
+"score": 0,
+"status": ""
+},
+{
+"id": 29,
+"question": "4-ماهي األركان الرئيسيه لفلسفه التوجيه بالبيع",
+"options": [
+{
+"a": "أ-المعروض من السلع يفوق الطلب عليها من جانب العمالء ",
+"b": "ب-زيادة الجهود الترويجية يترتب عليها تكرار العمالء للشراء",
+"c":"ج-يجب علي المنظمه ممارسه جهود بيعيه وترويجيه ضخمه لتحقيق المبيعات بهدف تحقيق أرباح",
+"d":"د-جميع اإلجابات صحيحه",
+}
+],
+"answer": "د-جميع اإلجابات صحيحه",
+"score": 0,
+"status": ""
+},
+{
+"id": 30,
+"question": "ماهي األركان الرئيسيه لفلسفه التوجيه بالتسويق ",
+"options": [
+{
+"a": "أ-نقطه بدايه أي نشاط تسويقي هو التحديد الدقيق لحاجات ورغبات العمالء والعمل علي اشباع تلك الحاجات",
+"b": "ب-تحقيق هدف اشباع االحتياجات للعمالء ",
+"c":"ج- الهدف الرئيسي الذي تسعي المنظمه الي تحقيقه هو هدف الربح العادل في االجل الطويل ",
+"d":"د-جميع اإلجابات صحيحه",
+}
+],
+"answer": "د-جميع اإلجابات صحيحه",
+"score": 0,
+"status": ""
+},
+{
+"id": 31,
+"question": "6......-أن المنظمه يجب أن تحدد حاجات ورغبات العمالء أو األسواق المستهدفه والعمل علي توصل تلك  األسواق لالشباعات المرغوبه بصوره اكثر فعاليه وكفاءه من منافسيها وذلك مع الحفاظ علي مصلحه المجتمع الذي تتواجد فيه هذه المنظمه.",
+"options": [
+{
+"a": "أ-فلسفه اداره التسويق",
+"b": "ب-اداره التسويق",
+"c":" ج- المفهوم االجتماعي للتسويق",
+"d":" د-المزيج التسوييقي",
+}
+],
+"answer": " ج- المفهوم االجتماعي للتسويق",
+"score": 0,
+"status": ""
+},
+{
+"id": 32,
+"question": "7 -ماهي أنواع المنتجات ",
+"options": [
+{
+"a": "أ-سلع ميسره",
+"b": "ب-السلع الخاصه",
+"c":" ج-أ وب معا",
+"d":" د-الشي مما سبق",
+}
+],
+"answer": " ج-أ وب معا",
+"score": 0,
+"status": ""
+},
+{
+"id": 33,
+"question": "8 -ماهي عناصر المزيج الترويجي",
+"options": [
+{
+"a": "أ-اإلعالن ",
+"b": "ب- البيع الشخصي",
+"c":"ج-العالقات العامه ",
+"d":"د-جميع اإلجابات الصحيحه",
+}
+],
+"answer": "د-جميع اإلجابات الصحيحه",
+"score": 0,
+"status": ""
+},
+{
+"id": 34,
+"question": "9....-هو وسيله غير شخصيه مدفوعه الثمن تستخدم لعرض او الترويج الفكار وسلع وخدمات  بواسطه جهه متخصصه في اإلعالن عن المنتجات",
+"options": [
+{
+"a": "أ-اإلعالن",
+"b": " ب-البيع الشخصي",
+"c":"ج-ترويج المبيعات",
+"d":"د-العالقات العامه",
+}
+],
+"answer": "أ-اإلعالن",
+"score": 0,
+"status": ""
+},
+{
+"id": 35,
+"question": "9....-هو وسيله غير شخصيه مدفوعه الثمن تستخدم لعرض او الترويج الفكار وسلع وخدمات  بواسطه جهه متخصصه في اإلعالن عن المنتجات",
+"options": [
+{
+"a": "أ-اإلعالن",
+"b": " ب-البيع الشخصي",
+"c":"ج-ترويج المبيعات",
+"d":"د-العالقات العامه",
+}
+],
+"answer": "أ-اإلعالن",
+"score": 0,
+"status": ""
+},
+{
+"id": 34,
+"question":"11-يتضمن ....عرض تشكليه مختلفه من الوسائل التي تتمثل في المعارض والجوائز والمسابقات والبيئات  المجانيه والطوابع.",
+"options": [
+{
+"a": "أ-اإلعالن",
+"b": " ب-البيع الشخصي",
+"c":"ج-ترويج المبيعات",
+"d":"د-العالقات العامه",
+}
+],
+"answer": "ج-ترويج المبيعات",
+"score": 0,
+"status": ""
+},
+]
+}
+
+
+var quizApp = function () {
+this.score = 0;
+this.qno = 1;
+this.currentque = 0;
+var totalque = quiz.JS.length;
+this.displayQuiz = function (cque) {
+this.currentque = cque;
+if (this.currentque < totalque) {
+$("#tque").html(totalque);
+$("#previous").attr("disabled", false);
+$("#next").attr("disabled", false);
+$("#qid").html(quiz.JS[this.currentque].id + '.');
+$("#question").html(quiz.JS[this.currentque].question);
+$("#question-options").html("");
+for (var key in quiz.JS[this.currentque].options[0]) {
+if (quiz.JS[this.currentque].options[0].hasOwnProperty(key)) {
+$("#question-options").append(
+"<div class='form-check option-block'>" +
+    "<label style='direction:ltr;'  class='form-check-label'>" +
+"<input  type='radio' class='form-check-input' name='option' id='q" + key + "' value='" + quiz.JS[this.currentque].options[0][key] + "'><span id='optionval'>" +
+quiz.JS[this.currentque].options[0][key] +
+"</span></label>"
+);
+}
+}
+}
+if (this.currentque <= 0) {
+$("#previous").attr("disabled", true);
+}
+if (this.currentque >= totalque) {
+$('#next').attr('disabled', true);
+for (var i = 0; i < totalque; i++) {
+this.score = this.score + quiz.JS[i].score;
+}
+return this.showResult(this.score);
+}
+}
+this.showResult = function (scr) {
+$("#result").addClass('result');
+$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr + '/' + totalque + "</h1>");
+for (var j = 0; j < totalque; j++) {
+var res;
+if (quiz.JS[j].score == 0) {
+res = '<span class="wrong">' + quiz.JS[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
+} else {
+res = '<span class="correct">' + quiz.JS[j].score + '</span><i class="fa fa-check c-correct"></i>';
+}
+$("#result").append(
+'<div class="result-question"><span>Q ' + quiz.JS[j].id + '</span> &nbsp;' + quiz.JS[j].question + '</div>' +
+'<div><b>Correct answer:</b> &nbsp;' + quiz.JS[j].answer + '</div>' +
+'<div class="last-row"><b>Score:</b> &nbsp;' + res +
+'</div>'
+);
+}
+}
+this.checkAnswer = function (option) {
+var answer = quiz.JS[this.currentque].answer;
+option = option.replace(/</g, "&lt;") //for <
+option = option.replace(/>/g, "&gt;") //for >
+option = option.replace(/"/g, "&quot;")
+if (option == quiz.JS[this.currentque].answer) {
+if (quiz.JS[this.currentque].score == "") {
+quiz.JS[this.currentque].score = 1;
+quiz.JS[this.currentque].status = "correct";
+}
+} else {
+quiz.JS[this.currentque].status = "wrong";
+}
+}
+this.changeQuestion = function (cque) {
+this.currentque = this.currentque + cque;
+this.displayQuiz(this.currentque);
+}
+}
+var jsq = new quizApp();
+var selectedopt;
+$(document).ready(function () {
+jsq.displayQuiz(0);
+$('#question-options').on('change', 'input[type=radio][name=option]', function (e) {
+//var radio = $(this).find('input:radio');
+$(this).prop("checked", true);
+selectedopt = $(this).val();
+});
+});
+$('#next').click(function (e) {
+e.preventDefault();
+if (selectedopt) {
+jsq.checkAnswer(selectedopt);
+}
+jsq.changeQuestion(1);
+});
+$('#previous').click(function (e) {
+e.preventDefault();
+if (selectedopt) {
+jsq.checkAnswer(selectedopt);
+}
+jsq.changeQuestion(-1);
+});
+</script>
+</body>
+</html>
